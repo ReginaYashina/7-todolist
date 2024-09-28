@@ -3,8 +3,9 @@ import {FilterValuesType} from "./App"
 import {TaskType} from "./Todolist"
 import {AddItemForm} from "./AddItemForm"
 import {EditableSpan} from "./EditableSpan"
-import {Button, IconButton} from '@mui/material';
+import {Button, Checkbox, IconButton, List, ListItem} from '@mui/material';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import {getListItemSx} from './Todolist.styles';
 
 type ButtonFilterType = {
     title: string
@@ -61,6 +62,7 @@ export const TodolistBody = ({
                 color={btn.color}
                 disableElevation
                 onClick={btn.onClickHandler}
+                sx={{m:"0 2px"}}
             >{btn.title}</Button>
         )
     })
@@ -73,20 +75,34 @@ export const TodolistBody = ({
         const tasksClasses: string = task.isDone ? "task-done" : "task"
 
         return (
-            <li key={task.id} className={tasksClasses}>
-                <input
-                    onChange={onChangeTaskStatusHandler}
-                    type="checkbox"
-                    checked={task.isDone}
-                />
-                {/* <span className={tasksClasses}>{task.title}</span> */}
-                <EditableSpan title={task.title} changeItemTitle={setTaskNewTitle}/>
-                <IconButton
+            <ListItem
+                key={task.id}
+                disablePadding
+                divider
+                secondaryAction={
+                    <IconButton
+                        size={'small'}
+                        onClick={onClickRemoveTaskHandler}>
+                        <HighlightOffIcon/>
+                    </IconButton>
+                }
+            >
+
+                <Checkbox
                     size={'small'}
-                    onClick={onClickRemoveTaskHandler}>
-                    <HighlightOffIcon/>
-                </IconButton>
-            </li>
+                    color={'primary'}
+                    onChange={onChangeTaskStatusHandler}
+                    checked={task.isDone}>
+                </Checkbox>
+
+                {/* <span className={tasksClasses}>{task.title}</span> */}
+                <EditableSpan
+                    title={task.title}
+                    changeItemTitle={setTaskNewTitle}
+                    classes={tasksClasses}
+                />
+
+            </ListItem>
         )
     })
 
@@ -101,9 +117,9 @@ export const TodolistBody = ({
     return (
         <div>
             <AddItemForm addItem={addNewTask} maxItemLength={10}/>
-            <ul>
+            <List>
                 {tasksList}
-            </ul>
+            </List>
             <div>
                 {filterButtons}
             </div>

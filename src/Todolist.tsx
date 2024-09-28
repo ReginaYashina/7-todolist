@@ -3,6 +3,8 @@ import { FilterValuesType } from "./App"
 import { Button } from "./Button"
 import { TodolistHeader } from "./TodolistHeader"
 import { TodolistBody } from "./TodolistBody"
+import {TodolistSx} from './Todolist.styles';
+import {Box} from '@mui/material';
 
 
 type TodolistPropsType = {
@@ -47,7 +49,7 @@ export const Todolist = ({
     const setTodolistNewTitle = (newTitle: string) => changeTodolistTitle(newTitle, todolistId)
 
     return (
-        <div className="todolist">
+        <Box sx={TodolistSx}>
             <TodolistHeader
                 title={title}
                 isCollapsed={collapsed}
@@ -67,6 +69,6 @@ export const Todolist = ({
                     changeTodolistFilter={changeTodolistFilter}
                 />
             }
-        </div>
+        </Box>
     )
 }

@@ -1,5 +1,5 @@
 import { EditableSpan } from "./EditableSpan"
-import {IconButton} from '@mui/material';
+import {Checkbox, IconButton, Switch} from '@mui/material';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 
 
@@ -21,11 +21,13 @@ export const TodolistHeader = (props: TodolistHeaderPropsType) => {
                 onClick={props.removeTodolist}>
                 <HighlightOffIcon/>
             </IconButton>
-            <input
-                type="checkbox"
+            <Switch
+                size={'small'}
+                color={'primary'}
                 onChange={props.toggleVeiwMode}
-                checked={props.isCollapsed}
-            />
+                checked={props.isCollapsed}>
+            </Switch>
+
         </h3>
     )
 }
