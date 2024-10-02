@@ -18,7 +18,7 @@ export type FilterValuesType = "all" | "active" | "completed"
 //U
 //D
 
-type TodolistType = {
+export type TodolistType = {
     id: string
     title: string
     filter: FilterValuesType
